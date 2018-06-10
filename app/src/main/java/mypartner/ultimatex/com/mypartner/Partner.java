@@ -5,6 +5,7 @@ public class Partner {
     public static final String MALE="male";
     public static final String FEMALE="female";
 
+    private int id;
     private String email;
     private String homeCity;
     private int age;
