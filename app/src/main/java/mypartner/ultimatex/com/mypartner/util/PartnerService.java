@@ -5,6 +5,7 @@ import java.util.List;
 import mypartner.ultimatex.com.mypartner.Partner;
 import mypartner.ultimatex.com.mypartner.model.LoginRequest;
 import mypartner.ultimatex.com.mypartner.model.LoginResponse;
+import mypartner.ultimatex.com.mypartner.model.SignUpResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,5 +18,8 @@ public interface PartnerService {
 
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginRequest request);
+
+    @POST("api/signup")
+    Call<SignUpResponse> signUp(@Body Partner partner);
 
 }
