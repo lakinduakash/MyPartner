@@ -2,11 +2,13 @@ package mypartner.ultimatex.com.mypartner;
 
 public class Partner {
 
-    public static final String MALE="male";
-    public static final String FEMALE="female";
+    public static final String MALE = "M";
+    public static final String FEMALE = "F";
 
     private int id;
+
     private String email;
+    private String name;
     private String homeCity;
     private int age;
     private String gender;
@@ -16,6 +18,20 @@ public class Partner {
     private String contact;
     private String height;
     private String password;
+
+    public Partner(String email, String name, String homeCity, int age, String gender, String cast, String religion, String other, String contact, String height, String password) {
+        this.email = email;
+        this.name = name;
+        this.homeCity = homeCity;
+        this.age = age;
+        this.gender = gender;
+        this.cast = cast;
+        this.religion = religion;
+        this.other = other;
+        this.contact = contact;
+        this.height = height;
+        this.password = password;
+    }
 
     public Partner(String email) {
         this.email = email;
@@ -100,5 +116,13 @@ public class Partner {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
