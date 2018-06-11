@@ -1,7 +1,9 @@
 package mypartner.ultimatex.com.mypartner.util;
 
+import mypartner.ultimatex.com.mypartner.Partner;
 import mypartner.ultimatex.com.mypartner.model.LoginRequest;
 import mypartner.ultimatex.com.mypartner.model.LoginResponse;
+import mypartner.ultimatex.com.mypartner.model.SignUpResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -34,6 +36,13 @@ public class Connection {
         PartnerService partnerService = retrofit.create(PartnerService.class);
 
         Call<LoginResponse> loginResponseCall = partnerService.login(request);
+        loginResponseCall.enqueue(responseCallback);
+    }
+
+    public void signUp(Partner partner, Callback<SignUpResponse> responseCallback) {
+        PartnerService partnerService = retrofit.create(PartnerService.class);
+
+        Call<SignUpResponse> loginResponseCall = partnerService.signUp(partner);
         loginResponseCall.enqueue(responseCallback);
     }
 
