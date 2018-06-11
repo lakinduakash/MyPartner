@@ -3,4 +3,24 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="login">Login</string>
+    <string name="dont_you_have_an_account">Don\'t you have an account?</string>
+    <string name="signup">Sign Up</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="name">Name</string>
+    <string name="new_password">New password</string>
+    <string name="home_town">Home Town</string>
+    <string name="contact_no">Contact no</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="religion">Religion</string>
+    <string name="cast">Cast</string>
+    <string name="Height">Height (Feet)</string>
+    <string name="other">Other description</string>
+    <string name="f">F</string>
+    <string name="g">G</string>
+    <string name="m">M</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="log_out">Log out</string>
+    <string name="my_prof">My profile</string>
 </resources>

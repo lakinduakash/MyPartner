@@ -3,6 +3,9 @@ package mypartner.ultimatex.com.mypartner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import mypartner.ultimatex.com.mypartner.tinydb.TinyDB;
 
@@ -16,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         tinyDB = new TinyDB(this);
 
@@ -47,5 +53,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_log_out)
+            logOut();
+        return super.onOptionsItemSelected(item);
     }
 }
