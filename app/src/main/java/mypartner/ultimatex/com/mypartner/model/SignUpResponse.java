@@ -5,6 +5,7 @@ public class SignUpResponse {
     private String email;
     private boolean loggedIn;
     private boolean success;
+    private int id;
 
     public SignUpResponse(String email, boolean loggedIn, boolean success) {
         this.email = email;
@@ -34,6 +35,14 @@ public class SignUpResponse {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

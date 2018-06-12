@@ -5,6 +5,8 @@ public class LoginResponse {
     private String email;
     private boolean loggedIn;
 
+    private int id;
+
     public LoginResponse(String email, boolean loggedIn) {
         this.email = email;
         this.loggedIn = loggedIn;
@@ -24,5 +26,13 @@ public class LoginResponse {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
