@@ -3,17 +3,29 @@ package mypartner.ultimatex.com.mypartner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import mypartner.ultimatex.com.mypartner.model.PartnerId;
 import mypartner.ultimatex.com.mypartner.tinydb.TinyDB;
+import mypartner.ultimatex.com.mypartner.util.Connection;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     static String LOGGED_IN_KEY = "loggedIn";
     TinyDB tinyDB;
     boolean loggedIn;
+
+    RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        rv = findViewById(R.id.recyclerView);
 
         tinyDB = new TinyDB(this);
 
@@ -33,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         checkLogin();
+        setListView();
 
     }
 
@@ -66,5 +81,32 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_log_out)
             logOut();
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setListView() {
+        Connection.getInstance().getIdList(new Callback<PartnerId[]>() {
+            @Override
+            public void onResponse(Call<PartnerId[]> call, Response<PartnerId[]> response) {
+                if (response.code() == 200) {
+                    PartnerId[] partnerIds = response.body();
+                    if (partnerIds != null) {
+                        ArrayList<PartnerId> list = new ArrayList<>(Arrays.asList(partnerIds));
+                        LinearLayoutManager rvl = new LinearLayoutManager(MainActivity.this);
+                        rv.setLayoutManager(rvl);
+                        rv.setAdapter(new PartnerIdListAdapter(list));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PartnerId[]> call, Throwable t) {
+                ArrayList<PartnerId> list = new ArrayList<>();
+                list.add(new PartnerId(1, "M"));
+                list.add(new PartnerId(2, "M"));
+                LinearLayoutManager rvl = new LinearLayoutManager(MainActivity.this);
+                rv.setLayoutManager(rvl);
+                rv.setAdapter(new PartnerIdListAdapter(list));
+            }
+        });
     }
 }
