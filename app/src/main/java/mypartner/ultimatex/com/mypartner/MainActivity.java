@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +22,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    static String LOGGED_IN_KEY = "loggedIn";
+    public final static String LOGGED_IN_KEY = "loggedIn";
+    public final static String ID_KEY = "selected_id";
+
     TinyDB tinyDB;
     boolean loggedIn;
+
+    private ArrayList<PartnerId> responseList = new ArrayList<>();
 
     RecyclerView rv;
 
@@ -39,15 +44,25 @@ public class MainActivity extends AppCompatActivity {
 
         tinyDB = new TinyDB(this);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String l = intent.getStringExtra(LoginActivity.LOGGED_IN_KEY);
 
         if (LoginActivity.LOGGED_IN_VALUE.equals(l)) {
             tinyDB.putBoolean(LOGGED_IN_KEY, true);
         }
 
+        final Intent profileIntent = new Intent(this, ProfileActivity.class);
+
         checkLogin();
         setListView();
+
+        rv.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                profileIntent.putExtra(ID_KEY, responseList.get(position).getId());
+                startActivity(profileIntent);
+            }
+        }));
 
     }
 
@@ -90,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PartnerId[] partnerIds = response.body();
                     if (partnerIds != null) {
-                        ArrayList<PartnerId> list = new ArrayList<>(Arrays.asList(partnerIds));
+                        responseList.addAll(Arrays.asList(partnerIds));
                         LinearLayoutManager rvl = new LinearLayoutManager(MainActivity.this);
                         rv.setLayoutManager(rvl);
-                        rv.setAdapter(new PartnerIdListAdapter(list));
+                        rv.setAdapter(new PartnerIdListAdapter(responseList));
                     }
                 }
             }
@@ -101,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<PartnerId[]> call, Throwable t) {
                 ArrayList<PartnerId> list = new ArrayList<>();
-                list.add(new PartnerId(1, "M"));
-                list.add(new PartnerId(2, "M"));
+                list.add(new PartnerId(0, "No connection"));
+                list.add(new PartnerId(0, "Connect to the sever"));
                 LinearLayoutManager rvl = new LinearLayoutManager(MainActivity.this);
                 rv.setLayoutManager(rvl);
                 rv.setAdapter(new PartnerIdListAdapter(list));
