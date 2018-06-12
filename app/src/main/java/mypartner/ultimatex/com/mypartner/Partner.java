@@ -9,7 +9,7 @@ public class Partner {
 
     private String email;
     private String name;
-    private String homeCity;
+    private String city;
     private int age;
     private String gender;
     private String cast;
@@ -22,7 +22,7 @@ public class Partner {
     public Partner(String email, String name, String homeCity, int age, String gender, String cast, String religion, String other, String contact, String height, String password) {
         this.email = email;
         this.name = name;
-        this.homeCity = homeCity;
+        this.city = homeCity;
         this.age = age;
         this.gender = gender;
         this.cast = cast;
@@ -46,12 +46,12 @@ public class Partner {
         this.email = email;
     }
 
-    public String getHomeCity() {
-        return homeCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setHomeCity(String homeCity) {
-        this.homeCity = homeCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public int getAge() {
