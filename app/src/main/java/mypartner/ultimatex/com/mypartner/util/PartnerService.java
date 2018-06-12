@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface PartnerService {
 
@@ -25,5 +26,8 @@ public interface PartnerService {
 
     @GET("api/userlist")
     Call<PartnerId[]> getIdList();
+
+    @GET("api/details/{id}")
+    Call<Partner[]> getProfile(@Path("id") int id);
 
 }

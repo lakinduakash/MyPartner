@@ -43,15 +43,21 @@ public class Connection {
     public void signUp(Partner partner, Callback<SignUpResponse> responseCallback) {
         PartnerService partnerService = retrofit.create(PartnerService.class);
 
-        Call<SignUpResponse> loginResponseCall = partnerService.signUp(partner);
-        loginResponseCall.enqueue(responseCallback);
+        Call<SignUpResponse> signUpResponseCall = partnerService.signUp(partner);
+        signUpResponseCall.enqueue(responseCallback);
     }
 
     public void getIdList(Callback<PartnerId[]> responseCallback) {
         PartnerService partnerService = retrofit.create(PartnerService.class);
 
-        Call<PartnerId[]> loginResponseCall = partnerService.getIdList();
-        loginResponseCall.enqueue(responseCallback);
+        Call<PartnerId[]> serviceIdList = partnerService.getIdList();
+        serviceIdList.enqueue(responseCallback);
+    }
+
+    public void getProfileDetails(int id, Callback<Partner[]> responseCallback) {
+        PartnerService partnerService = retrofit.create(PartnerService.class);
+        Call<Partner[]> profileCall = partnerService.getProfile(id);
+        profileCall.enqueue(responseCallback);
     }
 
 }
