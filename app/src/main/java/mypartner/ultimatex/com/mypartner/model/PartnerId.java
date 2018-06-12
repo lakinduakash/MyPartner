@@ -5,7 +5,7 @@ public class PartnerId {
 
     private int id;
     private String gender;
-    private String home_town;
+    private String city;
 
     public PartnerId(int id, String gender) {
         this.gender = gender;
@@ -28,12 +28,12 @@ public class PartnerId {
         this.gender = gender;
     }
 
-    public String getHome_town() {
-        return home_town;
+    public String getCity() {
+        return city;
     }
 
-    public void setHome_town(String home_town) {
-        this.home_town = home_town;
+    public void setCity(String city) {
+        this.city = city;
     }
 
 }
