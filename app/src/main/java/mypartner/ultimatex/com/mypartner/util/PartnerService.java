@@ -5,6 +5,7 @@ import java.util.List;
 import mypartner.ultimatex.com.mypartner.Partner;
 import mypartner.ultimatex.com.mypartner.model.LoginRequest;
 import mypartner.ultimatex.com.mypartner.model.LoginResponse;
+import mypartner.ultimatex.com.mypartner.model.PartnerId;
 import mypartner.ultimatex.com.mypartner.model.SignUpResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,5 +22,8 @@ public interface PartnerService {
 
     @POST("api/signup")
     Call<SignUpResponse> signUp(@Body Partner partner);
+
+    @GET("api/userlist")
+    Call<PartnerId[]> getIdList();
 
 }
