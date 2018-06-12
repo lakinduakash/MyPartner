@@ -1,4 +1,4 @@
-package mypartner.ultimatex.com.mypartner.util;
+package mypartner.ultimatex.com.mypartner.model;
 
 import java.util.ArrayList;
 
