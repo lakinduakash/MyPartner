@@ -11,11 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
+import mypartner.ultimatex.com.mypartner.model.LoginRequest;
+import mypartner.ultimatex.com.mypartner.model.LoginResponse;
 import mypartner.ultimatex.com.mypartner.model.SignUpResponse;
 import mypartner.ultimatex.com.mypartner.util.Connection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static mypartner.ultimatex.com.mypartner.LoginActivity.LOGGED_IN_ID_KEY;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -73,8 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signUp() {
-        String emailS = email.getText().toString().trim();
-        String passwordS = password.getText().toString();
+        final String emailS = email.getText().toString().trim();
+        final String passwordS = password.getText().toString();
         String nameS = name.getText().toString().trim();
         String homeCityS = homeCity.getText().toString().trim();
         String contactS = contact.getText().toString().trim();
@@ -112,12 +116,28 @@ public class SignUpActivity extends AppCompatActivity {
         Connection.getInstance().signUp(partner, new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+
                 if (response.code() == 200) {
                     if (response.body().isSuccess()) {
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        intent.putExtra(LoginActivity.LOGGED_IN_KEY, LoginActivity.LOGGED_IN_VALUE);
-                        startActivity(intent);
-                        finish();
+
+                        Connection.getInstance().login(new LoginRequest(emailS, passwordS), new Callback<LoginResponse>() {
+                            @Override
+                            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                intent.putExtra(LoginActivity.LOGGED_IN_KEY, LoginActivity.LOGGED_IN_VALUE);
+                                intent.putExtra(LOGGED_IN_ID_KEY, response.body().getId());
+                                startActivity(intent);
+                                finish();
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                            }
+                        });
+
                     }
                 }
                 if (response.code() == 400) {

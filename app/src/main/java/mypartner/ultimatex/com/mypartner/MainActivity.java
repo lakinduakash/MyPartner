@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +23,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String LOGGED_IN_KEY = "loggedIn";
+    public final static String LOGGED_IN_TINY_DB_KEY = "loggedIn";
     public final static String ID_KEY = "selected_id";
 
     TinyDB tinyDB;
     boolean loggedIn;
+
+    private int myId;
 
     private ArrayList<PartnerId> responseList = new ArrayList<>();
 
@@ -47,8 +50,12 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         String l = intent.getStringExtra(LoginActivity.LOGGED_IN_KEY);
 
+        myId = intent.getIntExtra(LoginActivity.LOGGED_IN_ID_KEY, 0);
+
+        Log.d("logged in id", "" + myId);
+
         if (LoginActivity.LOGGED_IN_VALUE.equals(l)) {
-            tinyDB.putBoolean(LOGGED_IN_KEY, true);
+            tinyDB.putBoolean(LOGGED_IN_TINY_DB_KEY, true);
         }
 
         final Intent profileIntent = new Intent(this, ProfileActivity.class);
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkLogin() {
-        loggedIn = tinyDB.getBoolean(LOGGED_IN_KEY);
+        loggedIn = tinyDB.getBoolean(LOGGED_IN_TINY_DB_KEY);
 
         if (!loggedIn) {
             Intent intent = new Intent(this, LoginActivity.class);
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logOut() {
-        tinyDB.putBoolean(LOGGED_IN_KEY, false);
+        tinyDB.putBoolean(LOGGED_IN_TINY_DB_KEY, false);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
@@ -95,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_log_out)
             logOut();
+        else if (item.getItemId() == R.id.action_my_profile) {
+            startActivity(new Intent(this, ProfileActivity.class).putExtra(ID_KEY, myId));
+        }
         return super.onOptionsItemSelected(item);
     }
 

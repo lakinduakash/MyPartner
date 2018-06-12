@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String LOGGED_IN_KEY = "my_key_logged_in";
     public static final String LOGGED_IN_VALUE = "my_value_logged_in";
 
+    public static final String LOGGED_IN_ID_KEY = "id_key";
+
     Button loggingButton;
     Button signUpButton;
     TextInputEditText email;
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra(LOGGED_IN_KEY, LOGGED_IN_VALUE);
+                        intent.putExtra(LOGGED_IN_ID_KEY, response.body().getId());
                         startActivity(intent);
                         finish();
                     }
