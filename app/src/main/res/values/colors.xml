@@ -3,4 +3,5 @@
     <color name="colorPrimary">#ff5bc0</color>
     <color name="colorPrimaryDark">#f235b3</color>
     <color name="colorAccent">#20a0e4</color>
+    <color name="invalidLoginWarningColor">#ebfc1666</color>
 </resources>
