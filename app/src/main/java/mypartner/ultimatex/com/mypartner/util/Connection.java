@@ -3,6 +3,7 @@ package mypartner.ultimatex.com.mypartner.util;
 import mypartner.ultimatex.com.mypartner.Partner;
 import mypartner.ultimatex.com.mypartner.model.LoginRequest;
 import mypartner.ultimatex.com.mypartner.model.LoginResponse;
+import mypartner.ultimatex.com.mypartner.model.PartnerId;
 import mypartner.ultimatex.com.mypartner.model.SignUpResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +44,13 @@ public class Connection {
         PartnerService partnerService = retrofit.create(PartnerService.class);
 
         Call<SignUpResponse> loginResponseCall = partnerService.signUp(partner);
+        loginResponseCall.enqueue(responseCallback);
+    }
+
+    public void getIdList(Callback<PartnerId[]> responseCallback) {
+        PartnerService partnerService = retrofit.create(PartnerService.class);
+
+        Call<PartnerId[]> loginResponseCall = partnerService.getIdList();
         loginResponseCall.enqueue(responseCallback);
     }
 
