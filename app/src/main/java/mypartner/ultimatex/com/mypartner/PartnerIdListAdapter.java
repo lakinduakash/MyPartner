@@ -34,7 +34,7 @@ public class PartnerIdListAdapter extends RecyclerView.Adapter<PartnerIdListAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         String gender = partnerIdArrayList.get(position).getGender();
-        String city = partnerIdArrayList.get(position).getHome_town();
+        String city = partnerIdArrayList.get(position).getCity();
         int id = partnerIdArrayList.get(position).getId();
         String idS = gender + " " + id;
         holder.userId.setText(idS);
