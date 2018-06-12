@@ -67,22 +67,24 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     boolean a = response.body().isLoggedIn();
                     if (a) {
-                        errorText.setText(response.body().getEmail());
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra(LOGGED_IN_KEY, LOGGED_IN_VALUE);
                         startActivity(intent);
                         finish();
                     }
                     else
-                        errorText.setText("" + response.code());
+                        errorText.setText("Invalid login");
+                } else if (response.code() == 403) {
+                    errorText.setText("Email or password not correct");
                 } else {
-                    errorText.setText("" + response.code());
+                    errorText.setText("Invalid login");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                errorText.setText("error");
+                errorText.setText("No connection to server");
             }
         });
 
