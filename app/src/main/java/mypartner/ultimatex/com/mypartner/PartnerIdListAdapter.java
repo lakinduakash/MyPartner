@@ -32,10 +32,13 @@ public class PartnerIdListAdapter extends RecyclerView.Adapter<PartnerIdListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         String gender = partnerIdArrayList.get(position).getGender();
+        String city = partnerIdArrayList.get(position).getHome_town();
         int id = partnerIdArrayList.get(position).getId();
         String idS = gender + " " + id;
-        holder.tv.setText(idS);
+        holder.userId.setText(idS);
+        holder.city.setText(city);
     }
 
     @Override
@@ -43,13 +46,15 @@ public class PartnerIdListAdapter extends RecyclerView.Adapter<PartnerIdListAdap
         return partnerIdArrayList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView userId;
+        TextView city;
 
-        public ViewHolder(View view) {
+
+        ViewHolder(View view) {
             super(view);
-            tv = view.findViewById(R.id.textView_question_list);
-
+            userId = view.findViewById(R.id.textView_user_id);
+            city = view.findViewById(R.id.textView_city);
         }
     }
 }
