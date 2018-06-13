@@ -7,7 +7,7 @@ public class Partner {
 
     private int id;
 
-    private String email;
+    private String username;
     private String name;
     private String city;
     private int age;
@@ -19,8 +19,8 @@ public class Partner {
     private String height;
     private String password;
 
-    public Partner(String email, String name, String homeCity, int age, String gender, String cast, String religion, String other, String contact, String height, String password) {
-        this.email = email;
+    public Partner(String username, String name, String homeCity, int age, String gender, String cast, String religion, String other, String contact, String height, String password) {
+        this.username = username;
         this.name = name;
         this.city = homeCity;
         this.age = age;
@@ -33,17 +33,17 @@ public class Partner {
         this.password = password;
     }
 
-    public Partner(String email) {
-        this.email = email;
+    public Partner(String username) {
+        this.username = username;
     }
 
 
-    public String getEmail() {
-        return email;
+    public String getusername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setusername(String username) {
+        this.username = username;
     }
 
     public String getCity() {
