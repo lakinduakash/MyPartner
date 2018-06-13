@@ -103,9 +103,6 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (homeCityS.length() < 1) {
             errorDialog("Home town is required!", "Please enter your home town").show();
             return;
-        } else if (contactS.length() < 1) {
-            errorDialog("Contact is required!", "Please enter your contact number").show();
-            return;
         } else if (genderS == null) {
             errorDialog("Gender is required!", "Please select your gender").show();
             return;
@@ -141,7 +138,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }
                 if (response.code() == 400) {
-                    errorDialog("Email Already exist!", "Please choose another username to sign up.").show();
+                    errorDialog("Username Already Exist!", "Please choose another username to sign up.").show();
                 }
             }
 
