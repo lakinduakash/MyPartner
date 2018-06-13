@@ -16,7 +16,7 @@ public class Connection {
     private static Retrofit retrofit;
     private static Connection connection;
 
-    private final String BASE_URL = "http://192.168.1.101:8000/";
+    private final String BASE_URL = "http://52.220.247.201:8000/";
 
     private Connection() {
 
