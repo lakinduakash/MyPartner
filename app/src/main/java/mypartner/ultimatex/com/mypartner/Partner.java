@@ -8,27 +8,27 @@ public class Partner {
     private int id;
 
     private String username;
-    private String name;
+
     private String city;
     private int age;
     private String gender;
     private String cast;
     private String religion;
     private String other;
-    private String contact;
+
     private String height;
     private String password;
 
-    public Partner(String username, String name, String homeCity, int age, String gender, String cast, String religion, String other, String contact, String height, String password) {
+    public Partner(String username, String homeCity, int age, String gender, String cast, String religion, String other, String height, String password) {
         this.username = username;
-        this.name = name;
+
         this.city = homeCity;
         this.age = age;
         this.gender = gender;
         this.cast = cast;
         this.religion = religion;
         this.other = other;
-        this.contact = contact;
+
         this.height = height;
         this.password = password;
     }
@@ -94,13 +94,6 @@ public class Partner {
         this.other = other;
     }
 
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
 
     public String getHeight() {
         return height;
@@ -118,11 +111,4 @@ public class Partner {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

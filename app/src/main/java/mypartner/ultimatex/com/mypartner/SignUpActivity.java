@@ -25,10 +25,9 @@ import static mypartner.ultimatex.com.mypartner.LoginActivity.LOGGED_IN_ID_KEY;
 public class SignUpActivity extends AppCompatActivity {
 
     TextInputEditText username;
-    TextInputEditText name;
+
     TextInputEditText password;
     TextInputEditText homeCity;
-    TextInputEditText contact;
     TextInputEditText age;
     TextInputEditText religion;
     TextInputEditText cast;
@@ -55,10 +54,9 @@ public class SignUpActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         username = findViewById(R.id.username_sign_up);
-        name = findViewById(R.id.name_sign_up);
+
         password = findViewById(R.id.password_sign_up);
         homeCity = findViewById(R.id.homeTown_sign_up);
-        contact = findViewById(R.id.contact_sign_up);
         age = findViewById(R.id.age_sign_up);
         religion = findViewById(R.id.religion_sign_up);
         cast = findViewById(R.id.cast_sign_up);
@@ -79,9 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp() {
         final String usernameS = username.getText().toString().trim();
         final String passwordS = password.getText().toString();
-        String nameS = name.getText().toString().trim();
+
         String homeCityS = homeCity.getText().toString().trim();
-        String contactS = contact.getText().toString().trim();
         String ageS = age.getText().toString().trim();
         String religionS = religion.getText().toString().trim();
         String castS = cast.getText().toString().trim();
@@ -94,9 +91,6 @@ public class SignUpActivity extends AppCompatActivity {
         if (usernameS.length() < 4) {
             errorDialog("Invalid username", "Please enter username with more than 4 characters").show();
             return;
-        } else if (nameS.length() < 1) {
-            errorDialog("Name is required!", "Please enter your name").show();
-            return;
         } else if (passwordS.length() < 4) {
             errorDialog("Password is too short!", "Please enter password with minimum 4 characters").show();
             return;
@@ -108,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        Partner partner = new Partner(usernameS, nameS, homeCityS, Integer.parseInt(ageS), genderS, castS, religionS, otherS, contactS, heightS, passwordS);
+        Partner partner = new Partner(usernameS, homeCityS, Integer.parseInt(ageS), genderS, castS, religionS, otherS, heightS, passwordS);
 
         Connection.getInstance().signUp(partner, new Callback<SignUpResponse>() {
             @Override
