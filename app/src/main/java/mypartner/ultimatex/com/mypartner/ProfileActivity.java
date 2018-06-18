@@ -17,10 +17,12 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView textViewHomeTown;
     private TextView textViewAge;
     private TextView textViewGender;
+    private TextView textViewEmail;
     private TextView textViewReligion;
     private TextView textViewCast;
     private TextView textViewHeight;
     private TextView textViewOther;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         textViewHomeTown = findViewById(R.id.textView_home_town);
         textViewAge = findViewById(R.id.textView_age);
         textViewGender = findViewById(R.id.textView_gender);
+        textViewEmail = findViewById(R.id.textView_email);
         textViewReligion = findViewById(R.id.textView_religion);
         textViewCast = findViewById(R.id.textView_cast);
         textViewHeight = findViewById(R.id.textView_height);
@@ -60,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
                             textViewHomeTown.setText(p.getCity());
                             textViewAge.setText("" + p.getAge());
                             textViewGender.setText("M".equals(p.getGender()) ? "Male" : "Female");
+                            textViewEmail.setText(p.getEmail());
                             textViewReligion.setText(p.getReligion());
                             textViewCast.setText(p.getCast());
                             textViewHeight.setText(p.getHeight());
