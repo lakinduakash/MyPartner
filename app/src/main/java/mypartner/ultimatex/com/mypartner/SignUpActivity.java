@@ -24,7 +24,7 @@ import static mypartner.ultimatex.com.mypartner.LoginActivity.LOGGED_IN_ID_KEY;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    TextInputEditText username;
+    TextInputEditText email;
 
     TextInputEditText password;
     TextInputEditText homeCity;
@@ -53,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        username = findViewById(R.id.username_sign_up);
+        email = findViewById(R.id.email_sign_up);
 
         password = findViewById(R.id.password_sign_up);
         homeCity = findViewById(R.id.homeTown_sign_up);
@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signUp() {
-        final String usernameS = username.getText().toString().trim();
+        final String emailS = email.getText().toString().trim();
         final String passwordS = password.getText().toString();
 
         String homeCityS = homeCity.getText().toString().trim();
@@ -88,8 +88,8 @@ public class SignUpActivity extends AppCompatActivity {
         String genderS = getSelectedGender();
 
 
-        if (usernameS.length() < 4) {
-            errorDialog("Invalid username", "Please enter username with more than 4 characters").show();
+        if (!isValidEmail(emailS) ) {
+            errorDialog("Invalid email", "Please enter an valid email address").show();
             return;
         } else if (passwordS.length() < 4) {
             errorDialog("Password is too short!", "Please enter password with minimum 4 characters").show();
@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        Partner partner = new Partner(usernameS, homeCityS, Integer.parseInt(ageS), genderS, castS, religionS, otherS, heightS, passwordS);
+        Partner partner = new Partner(emailS, homeCityS, Integer.parseInt(ageS), genderS, castS, religionS, otherS, heightS, passwordS);
 
         Connection.getInstance().signUp(partner, new Callback<SignUpResponse>() {
             @Override
@@ -111,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     if (response.body().isSuccess()) {
 
-                        Connection.getInstance().login(new LoginRequest(usernameS, passwordS), new Callback<LoginResponse>() {
+                        Connection.getInstance().login(new LoginRequest(emailS, passwordS), new Callback<LoginResponse>() {
                             @Override
                             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
@@ -132,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }
                 if (response.code() == 400) {
-                    errorDialog("Username Already Exist!", "Please choose another username to sign up.").show();
+                    errorDialog("Username Already Exist!", "Please choose another email to sign up.").show();
                 }
             }
 

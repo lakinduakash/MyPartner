@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button loggingButton;
     Button signUpButton;
-    TextInputEditText username;
+    TextInputEditText email;
     TextInputEditText password;
     TextView errorText;
 
@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loggingButton = findViewById(R.id.buttonLogin);
         signUpButton = findViewById(R.id.buttonSignup);
-        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         errorText = findViewById(R.id.errorText);
 
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login() {
         Connection con = Connection.getInstance();
-        con.login(new LoginRequest(username.getText().toString(), password.getText().toString()), new Callback<LoginResponse>() {
+        con.login(new LoginRequest(email.getText().toString(), password.getText().toString()), new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.code() == 200) {
