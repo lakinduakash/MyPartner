@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String LOGGED_IN_TINY_DB_KEY = "loggedIn";
     public final static String ID_KEY = "selected_id";
+    public final static String MY_ID_KEY = "my_id";
 
     TinyDB tinyDB;
     boolean loggedIn;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (LoginActivity.LOGGED_IN_VALUE.equals(l)) {
             tinyDB.putBoolean(LOGGED_IN_TINY_DB_KEY, true);
+            tinyDB.putInt(MY_ID_KEY, myId);
         }
 
         final Intent profileIntent = new Intent(this, ProfileActivity.class);
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkLogin() {
         loggedIn = tinyDB.getBoolean(LOGGED_IN_TINY_DB_KEY);
+        myId = tinyDB.getInt(MY_ID_KEY);
 
         if (!loggedIn) {
             Intent intent = new Intent(this, LoginActivity.class);
